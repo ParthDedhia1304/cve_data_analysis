@@ -5,8 +5,8 @@ __pycache__/
 *.pyd
 
 # Jupyter Notebooks
-*.ipynb
-*.ipynb_checkpoints/
+
+
 
 # Environment / credentials
 .env
