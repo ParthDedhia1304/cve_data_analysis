@@ -1,0 +1,30 @@
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter Notebooks
+*.ipynb
+*.ipynb_checkpoints/
+
+# Environment / credentials
+.env
+venv/
+.env/
+.venv/
+
+# Large data files
+*.json
+*.zip
+*.pt
+*.db
+
+# Logs and cache
+*.log
+*.cache/
+
+# IDE / system files
+.vscode/
+.idea/
+.DS_Store

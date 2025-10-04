@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='images/search.png') }}" type="image/png">
+    <title>NLP Project - CVE Intelligence Dashboard</title>
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .bg-gradient {
+            background: linear-gradient(135deg, #1a1a1a 0%, #363636 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #4F46E5;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+        .mobile-menu.hidden {
+            transform: translateX(-100%);
+        }
+    </style>
+</head>
+
+<body class="bg-gradient min-h-screen text-white">
+
+    <!-- Navigation -->
+    <nav class="bg-black/30 backdrop-blur-md w-full">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <img src="https://iiitl.ac.in/wp-content/uploads/2019/10/Final_Logo_IIITL.png" 
+                         alt="IIITL Logo" 
+                         class="h-12 w-auto mr-4">
+                    <div class="text-xl font-bold">NLP Project</div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="{{ url_for('home') }}" class="nav-link hover:text-indigo-400">Home</a>
+                    <a href="{{ url_for('dashboard') }}" class="nav-link hover:text-indigo-400">Dashboard</a>
+                    <a href="{{ url_for('cve') }}" class="nav-link hover:text-indigo-400">CVE</a>
+                    <a href="{{ url_for('similar_search') }}" class="nav-link hover:text-indigo-400">Similar Search</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                              d="M4 6h16M4 12h16m-16 6h16"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="mobile-menu hidden md:hidden mt-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="{{ url_for('home') }}" class="nav-link hover:text-indigo-400">Home</a>
+                    <a href="{{ url_for('dashboard') }}" class="nav-link hover:text-indigo-400">Dashboard</a>
+                    <a href="{{ url_for('cve') }}" class="nav-link hover:text-indigo-400">CVE</a>
+                    <a href="{{ url_for('similar_search') }}" class="nav-link hover:text-indigo-400">Similar Search</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="container mx-auto px-6 pt-20 text-center mb-20">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+            <span class="text-indigo-400">CVE Intelligence Platform</span>
+        </h1>
+        <p class="text-gray-300 max-w-2xl mx-auto leading-relaxed mb-6">
+            Streamlining the extraction, analysis, and visualization of Common Vulnerabilities and Exposures (CVE) data 
+            using advanced NLP, vector search, and real-time dashboards.
+        </p>
+        <a href="{{ url_for('dashboard') }}" 
+           class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition">
+           Explore Dashboard
+        </a>
+    </main>
+
+    <!-- Features Section -->
+    <section class="container mx-auto px-6 mb-20">
+        <h2 class="text-2xl font-bold text-center mb-10">Key Features</h2>
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 card-hover">
+                <h3 class="text-xl font-semibold mb-2 text-indigo-300">Data Extraction</h3>
+                <p class="text-gray-300">Automated scraping and API integration for up-to-date CVE vulnerability data collection.</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 card-hover">
+                <h3 class="text-xl font-semibold mb-2 text-indigo-300">Data Cleaning</h3>
+                <p class="text-gray-300">Processes raw CVE data to ensure accuracy, consistency, and removal of duplicates.</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 card-hover">
+                <h3 class="text-xl font-semibold mb-2 text-indigo-300">Database Management</h3>
+                <p class="text-gray-300">Securely stores processed data in MongoDB Atlas for quick access and scalability.</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 card-hover">
+                <h3 class="text-xl font-semibold mb-2 text-indigo-300">Interactive Visualization</h3>
+                <p class="text-gray-300">Visualizes vulnerability data with Plotly for real-time insights and dynamic exploration.</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 card-hover">
+                <h3 class="text-xl font-semibold mb-2 text-indigo-300">NLP Integration</h3>
+                <p class="text-gray-300">Uses GROQ with LLaMA 3.1 8B to interpret CVE descriptions and generate natural language insights.</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 card-hover">
+                <h3 class="text-xl font-semibold mb-2 text-indigo-300">Similarity Search</h3>
+                <p class="text-gray-300">Finds top 5 similar CVEs for a given cyberattack description using RAG and vector search via Pinecone.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Overview Section -->
+    <section class="container mx-auto px-6 mb-20">
+        <div class="bg-white/5 backdrop-blur-lg rounded-xl p-8">
+            <h2 class="text-2xl font-bold mb-6">Project Overview</h2>
+            <p class="text-gray-300 leading-relaxed">
+                The CVE NLP Intelligence project automates data collection, cleaning, and analysis of 
+                cybersecurity vulnerabilities. It integrates NLP models for semantic search and language inference, 
+                combined with Flask, MongoDB Atlas, and Plotly visualizations to deliver a seamless and interactive 
+                vulnerability analysis platform.
+            </p>
+            <ul class="list-disc pl-6 text-gray-300 mt-4 space-y-2">
+                <li>Scraping and API-based CVE data ingestion pipeline.</li>
+                <li>Data cleaning and consistency checks for high-quality insights.</li>
+                <li>MongoDB Atlas backend for structured data storage and retrieval.</li>
+                <li>Flask-powered dashboard with intuitive data visualizations.</li>
+                <li>Integration with GROQ + LLaMA 3.1 for intelligent query answering.</li>
+                <li>Semantic similarity detection using RAG and Pinecone vector embeddings.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black/30 backdrop-blur-md py-6 text-center text-gray-400">
+        <p>&copy; 2025 CVE NLP Intelligence | Flask · MongoDB · LLaMA 3.1</p>
+    </footer>
+
+    <!-- JS for Mobile Menu -->
+    <script>
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuButton = document.querySelector('button.md\\:hidden');
+            if (!mobileMenu.contains(event.target) && !mobileMenuButton.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    </script>
+
+</body>
+</html>
