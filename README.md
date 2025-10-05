@@ -9,9 +9,6 @@
 
 An intelligent web application designed to streamline the analysis of **Common Vulnerabilities and Exposures (CVEs)**. This project leverages Natural Language Processing (NLP) to provide a user-friendly dashboard, detailed CVE summaries, and a powerful similarity search to find related vulnerabilities based on natural language descriptions.
 
-**Deployed at:** [https://nlpproject-pl6e.onrender.com/](https://nlpproject-pl6e.onrender.com/)
-
-**Demo at:** [Video Demo](https://drive.google.com/file/d/1oFGXaLMhgJY7y8OKO4hEWjZIrAAFM5Ly/view?usp=drive_link)
 
 ---
 
@@ -112,11 +109,4 @@ Follow these steps to set up and run the project locally.
 
 ---
 
-## 📬 Contact
 
-For any inquiries, please contact the project team at:
-* `msa23010@iiitl.ac.in`
-* `msd23007@iiitl.ac.in`
-* `msd23004@iiitl.ac.in`
-* `msa23004@iiitl.ac.in`
-* `msd23024@iiitl.ac.in`
